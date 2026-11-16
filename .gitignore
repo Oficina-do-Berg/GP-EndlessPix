@@ -1,0 +1,30 @@
+# Segredos e dados locais
+.env
+.env.*
+!.env.example
+
+# Dados de execução (banco, token, temporários, logs)
+data/*
+!data/.gitkeep
+*.log
+*.tar.gz
+*.zip
+*.db
+*.db-wal
+*.db-shm
+backups/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Interface
+ui/node_modules/
+ui/dist/
+
+# Sistema
+.DS_Store
+Thumbs.db

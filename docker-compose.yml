@@ -1,0 +1,62 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        GOTOHP_BINARY: ${GOTOHP_BUILD_BINARY:-bin/gotohp-cli_amd64}
+    image: photosweb:local
+    container_name: photosweb
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    env_file:
+      - .env
+    environment:
+      DATA_DIR: /data
+      TMP_DIR: /data/tmp
+      DB_PATH: /data/app.db
+      GOTOHP_CONFIG: /data/gotohp.config
+    volumes:
+      - photos_data:/data
+    expose:
+      - "8000"
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: photosweb-caddy
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      DOMAIN: "${DOMAIN:?Defina DOMAIN no arquivo .env}"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  photos_data:
+    name: photosweb_data
+  caddy_data:
+    name: photosweb_caddy_data
+  caddy_config:
+    name: photosweb_caddy_config

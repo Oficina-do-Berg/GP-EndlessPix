@@ -1,0 +1,14 @@
+# Scripts e configuração de deploy precisam de LF para rodar no Linux.
+* text=auto eol=lf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binários e imagens não devem ser normalizados.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.exe binary
+bin/gotohp-cli_amd64 binary
+bin/gotohp-cli_arm64 binary
