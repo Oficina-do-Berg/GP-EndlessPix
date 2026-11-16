@@ -7,7 +7,7 @@ dispositivo. O app usa a API do Pixel para enviar em qualidade original sem
 consumir a cota da conta.
 
 <p align="center">
-  <img src="docs/assets/cover.png" alt="GP-EndlessPix: interface web para envio de fotos e vídeos ao Google Photos" width="100%">
+  <img src="docs/assets/cover.png" alt="GP-EndlessPix: arraste fotos e vídeos para enviar ao Google Photos pelo seu servidor" width="100%">
 </p>
 
 <p align="center">
