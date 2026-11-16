@@ -22,6 +22,7 @@ ui
 # Arquivos que só existem no desenvolvimento local
 README.md
 DEPLOY.md
+docs
 docker-compose.yml
 Caddyfile
 deploy.sh
