@@ -4,8 +4,19 @@
 <summary><strong>O que é o GP-EndlessPix?</strong></summary>
 
 É uma aplicação web que você instala na sua própria VPS para enviar fotos e
-vídeos ao Google Photos pelo navegador. O upload é processado pelo servidor,
-usando o `gotohp-cli`, e o histórico fica no seu banco local.
+vídeos ao Google Photos pelo navegador, com upload ilimitado via API do Pixel.
+O upload é processado pelo servidor, usando o `gotohp-cli`, e o histórico fica
+no seu banco local.
+</details>
+
+<details>
+<summary><strong>O upload é realmente ilimitado?</strong></summary>
+
+Na prática, sim. O GP-EndlessPix usa o `gotohp-cli`, que se autentica como um
+dispositivo Pixel e envia os arquivos em qualidade original sem descontar da
+cota do Google Photos. O limite é apenas por arquivo, definido em
+`MAX_UPLOAD_MB` (4 GB por padrão). Como é uma integração não oficial, o
+comportamento pode mudar e o uso pode resultar em bloqueio da conta.
 </details>
 
 <details>
@@ -53,8 +64,9 @@ fazer outra instalação.
 <summary><strong>Posso usar minha conta principal?</strong></summary>
 
 Você pode, mas o recomendado é testar primeiro com uma conta secundária. O
-gotohp emula um aparelho Pixel para usar o backup "ilimitado"; isso contraria os
-termos do Google e pode resultar em bloqueio da conta. Use por sua conta e risco.
+upload ilimitado depende de uma integração não oficial com a API do Pixel; isso
+contraria os termos do Google e pode resultar em bloqueio da conta. Use por sua
+conta e risco.
 </details>
 
 <details>

@@ -1,8 +1,8 @@
 # Instalação em VPS
 
 Guia de produção do **GP-EndlessPix** em uma VPS Linux com Docker. Ao final, o
-app estará disponível em uma URL HTTPS própria, pronto para receber uploads de
-qualquer dispositivo.
+app estará disponível em uma URL HTTPS própria, com upload ilimitado via API do
+Pixel, pronto para receber arquivos de qualquer dispositivo.
 
 ```text
 Internet -> Caddy (443) -> app FastAPI (8000, interno) -> gotohp-cli -> Google Photos

@@ -2,6 +2,8 @@
 
 O GP-EndlessPix é uma aplicação web auto-hospedada que recebe arquivos pelo
 navegador e os envia ao Google Photos usando o `gotohp-cli` rodando no servidor.
+O upload é ilimitado: o `gotohp-cli` se autentica como um dispositivo Pixel XL e
+não desconta os arquivos da cota da conta.
 
 ---
 
@@ -31,6 +33,11 @@ O navegador não fala diretamente com o Google. Ele envia o arquivo para a sua
 VPS; o worker do servidor faz o upload para a conta conectada. Depois que o
 arquivo chega ao servidor, o envio continua mesmo se a aba do navegador for
 fechada.
+
+O `gotohp-cli` usa a API do Pixel, uma integração não oficial que se apresenta
+ao Google como um Pixel XL. Os arquivos são enviados em qualidade original e
+não consomem a cota do Google Photos. Por ser uma integração não oficial, o
+comportamento pode mudar sem aviso e o uso está sujeito aos termos do Google.
 
 ---
 
@@ -150,6 +157,8 @@ O login é `POST /login` com o campo `password`.
 
 ## Decisões de projeto
 
+- **API do Pixel:** o gotohp se identifica como Pixel XL para enviar em
+  qualidade original sem consumir cota; é uma integração não oficial.
 - **Um worker:** evita uploads duplicados e disputa pelo mesmo SQLite.
 - **SQLite:** simples de operar, backup e restaurar em uma VPS pequena.
 - **Build da UI versionado:** a VPS não precisa de Node.js para rodar o app.

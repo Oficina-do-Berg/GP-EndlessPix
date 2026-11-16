@@ -1,10 +1,10 @@
 # GP-EndlessPix
 
-**Um servidor privado de uploads para o Google Photos.**
+**Upload ilimitado para o Google Photos, no seu próprio servidor.**
 
 Instale em uma VPS, publique uma URL e envie fotos e vídeos de qualquer
-dispositivo. O navegador só precisa de internet; o upload ao Google é feito pelo
-seu servidor.
+dispositivo. O app usa a API do Pixel para enviar em qualidade original sem
+consumir a cota da conta.
 
 <p align="center">
   <img src="docs/assets/cover.png" alt="GP-EndlessPix: interface web para envio de fotos e vídeos ao Google Photos" width="100%">
@@ -25,10 +25,12 @@ seu servidor.
   <img src="https://img.shields.io/badge/HTTPS-Caddy-1f9d55" alt="HTTPS com Caddy">
 </p>
 
-> **Aviso:** o gotohp emula um aparelho Pixel para usar o backup "ilimitado" do
-> Google Photos. Isso contraria os termos do Google e pode fazer a conta ser
-> bloqueada. Teste primeiro com uma conta secundária. O projeto não é afiliado
-> ao Google.
+> **Upload ilimitado via API do Pixel.** O GP-EndlessPix usa o `gotohp-cli`
+> para se autenticar como um dispositivo Pixel e enviar arquivos em qualidade
+> original, sem descontar do armazenamento do Google Photos. É uma integração
+> não oficial: pode contrariar os termos do Google e resultar em bloqueio da
+> conta. Teste primeiro com uma conta secundária. O projeto não é afiliado ao
+> Google.
 
 ---
 
@@ -48,6 +50,20 @@ banco e a própria conta Google.
 
 O caminho recomendado de hospedagem é uma **VPS Linux comum**. O guia também
 inclui uma seção opcional para sandboxes Instabox, útil apenas para testes.
+
+---
+
+## Upload ilimitado com a API do Pixel
+
+O GP-EndlessPix não depende de Google One nem de espaço extra na conta. O
+`gotohp-cli` se apresenta ao Google como um **dispositivo Pixel XL** e envia os
+arquivos em **qualidade original**, sem descontar da cota do Google Photos.
+
+O limite é apenas por arquivo, definido em `MAX_UPLOAD_MB` (4 GB por padrão).
+Não há limite de quantidade nem cobrança por upload.
+
+Como é uma integração não oficial, o comportamento pode mudar sem aviso e o uso
+está sujeito aos termos do Google. Teste primeiro com uma conta secundária.
 
 ---
 
@@ -95,8 +111,8 @@ GP-EndlessPix (8000, interno)
                 └─ o temporário é apagado após o sucesso
 ```
 
-- O navegador é só a interface. Quem envia ao Google é o `gotohp` rodando no
-  servidor.
+- O navegador é só a interface. Quem envia ao Google é o `gotohp-cli`, que se
+  autentica como um Pixel XL e não consome a cota da conta.
 - Um worker processa a fila, um arquivo por vez, com até 3 tentativas.
 - Se o arquivo já existir no Google Photos, o gotohp marca como "skipped" e o
   app trata como sucesso.
@@ -130,6 +146,7 @@ A interface tem três áreas:
 
 | Recurso | Detalhe |
 |---|---|
+| Upload ilimitado | API do Pixel, qualidade original e sem consumo da cota |
 | URL própria | Acesso por domínio e HTTPS automático via Caddy |
 | Upload remoto | Funciona de qualquer navegador, sem instalar cliente |
 | Fila resiliente | Pausa, cancelamento, retry e recuperação após reinício |
@@ -200,7 +217,8 @@ Cloudflare, ARM e a seção opcional do Instabox, está em
 - O backup do volume contém o token: guarde-o como um segredo.
 - Uma instalação atende **um usuário e uma conta Google por vez**.
 - O app não apaga nada do Google Photos.
-- O uso do gotohp pode violar os termos do Google e resultar em bloqueio.
+- O upload ilimitado usa uma integração não oficial com a API do Pixel; isso
+  pode violar os termos do Google e resultar em bloqueio.
 
 Leia o [guia de segurança](docs/SEGURANCA.md) antes de colocar dados reais em
 produção.

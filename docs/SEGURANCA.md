@@ -94,6 +94,9 @@ proteja o arquivo como protegeria sua senha.
   proteja o acesso ao servidor e aos backups.
 - **Sem auditoria avançada.** O histórico registra os uploads, mas não é um
   sistema de gestão de identidade.
+- **Upload ilimitado não oficial.** O app usa a API do Pixel por meio do
+  `gotohp-cli`; o comportamento pode mudar sem aviso e não há garantia do
+  serviço por parte do Google.
 
 ---
 
@@ -105,5 +108,6 @@ proteja o arquivo como protegeria sua senha.
 4. Revise os backups e descarte os que não forem confiáveis.
 5. Verifique a conta Google e os dispositivos conectados.
 
-O uso do gotohp pode contrariar os termos do Google e resultar em bloqueio da
-conta. Use por sua conta e risco.
+O upload ilimitado depende de uma integração não oficial com a API do Pixel e
+pode contrariar os termos do Google, resultando em bloqueio da conta. Use por
+sua conta e risco.
